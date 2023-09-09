@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour
     public GameObject stonePrefab;
     public GameObject copperPrefab;
     public GameObject hardStonePrefab;
+    public GameObject ironPrefab;
     public int gridX = -3;
     public int gridY = -5;
     public float spacing = 2f;
@@ -30,10 +31,20 @@ public class Grid : MonoBehaviour
                 }
                 GameObject currObj;
 
+                
+
                 if(Random.Range(1, 10000) <= 5)
                 {
                     blocksToSkip = Random.Range(90, 180);
                 }
+
+
+                //Iron
+                if (GenerateBlock(x, y, ironPrefab, -30, -60, 1,100))
+                {
+                    continue;
+                }
+
                 // Ruby
                 if (GenerateBlock(x, y, rubyPrefab, -60, 5, 1000))
                 {
