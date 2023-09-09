@@ -13,6 +13,7 @@ public class Grid : MonoBehaviour
     public int gridX = -3;
     public int gridY = -5;
     public float spacing = 2f;
+    int blocksToSkip = 0;
     void Start()
     {
 
@@ -22,9 +23,17 @@ public class Grid : MonoBehaviour
 
             for (int x = 0; x < gridX; x++)
             {
+                if(blocksToSkip > 0 && Random.Range(0, 100) <= 89)
+                {
+                    blocksToSkip--;
+                    continue;
+                }
                 GameObject currObj;
 
-
+                if(Random.Range(1, 10000) <= 5)
+                {
+                    blocksToSkip = Random.Range(90, 180);
+                }
                 // Ruby
                 if (GenerateBlock(x, y, rubyPrefab, -60, 5, 1000))
                 {
@@ -90,4 +99,6 @@ public class Grid : MonoBehaviour
         }
         return false;
     }
+
+    
 }
