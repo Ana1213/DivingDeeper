@@ -16,24 +16,29 @@ public class Enemy : MonoBehaviour
     bool canWalk = true;
     protected virtual void Walk()
     {
+        Transform plrPos = PlayerController.instance.transform;
+        float distance = Vector2.Distance(plrPos.position, transform.position);
+
+        if(distance <= stopDistance)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
         if (canWalk)
         {
-          
-            Transform plrPos = PlayerController.instance.transform;
-            float distance = Vector2.Distance(plrPos.position, transform.position);
-            if (distance <= sightDistance && distance >= stopDistance)
+            if (distance <= sightDistance)
             {
                 Vector2 angle = (plrPos.position - transform.position).normalized;
                 rb.velocity = angle * speed;
 
             }
-            else
-            {
+            else{
                 rb.velocity = Vector2.zero;
             }
+           
             WalkCooldown();
         }
-
+        
     }
 
     async void WalkCooldown()
