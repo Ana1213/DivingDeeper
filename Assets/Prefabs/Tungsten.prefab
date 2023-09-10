@@ -127,3 +127,4 @@ MonoBehaviour:
   hardness: 75
   blockLife: 0
   value: 25
+  blockName: Tungsten

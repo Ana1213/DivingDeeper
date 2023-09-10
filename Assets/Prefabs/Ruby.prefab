@@ -127,3 +127,4 @@ MonoBehaviour:
   hardness: 300
   blockLife: 0
   value: 50
+  blockName: Ruby

@@ -127,3 +127,4 @@ MonoBehaviour:
   hardness: 250
   blockLife: 0
   value: 1
+  blockName: Magma Stone

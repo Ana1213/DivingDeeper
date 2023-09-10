@@ -127,3 +127,4 @@ MonoBehaviour:
   hardness: 20
   blockLife: 0
   value: 7
+  blockName: Copper

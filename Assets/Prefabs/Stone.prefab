@@ -127,3 +127,4 @@ MonoBehaviour:
   hardness: 15
   blockLife: 0
   value: 1
+  blockName: Stone

@@ -7,7 +7,7 @@ public class BreakableBlock : MonoBehaviour
     public int hardness = 100;
     public int blockLife;
     public int value = 5;
-
+    public string blockName;
     private void Awake()
     {
         blockLife = hardness;
