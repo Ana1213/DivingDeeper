@@ -11,6 +11,7 @@ public class Grid : MonoBehaviour
     public GameObject copperPrefab;
     public GameObject hardStonePrefab;
     public GameObject ironPrefab;
+    public GameObject tungstenPrefab;
     public int gridX = -3;
     public int gridY = -5;
     public float spacing = 2f;
@@ -41,6 +42,11 @@ public class Grid : MonoBehaviour
 
                 //Iron
                 if (GenerateBlock(x, y, ironPrefab, -30, -60, 1,100))
+                {
+                    continue;
+                }
+
+                if(GenerateBlock(x,y, tungstenPrefab, -50, -100, 1, 100))
                 {
                     continue;
                 }
