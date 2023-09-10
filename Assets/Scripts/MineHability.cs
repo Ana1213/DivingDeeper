@@ -59,7 +59,7 @@ public class MineHability : MonoBehaviour
         {
 
             hardnessText.enabled = state;
-            hardnessText.text = block.blockLife + "/" + block.hardness;
+            hardnessText.text = block.blockName + ": " +block.blockLife + "/" + block.hardness;
         }
 
 

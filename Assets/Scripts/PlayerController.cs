@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI depthText;
     public static PlayerController instance;
 
+    public int depth;
+
     GameObject canvas;
     TextMeshProUGUI cashText;
     float lastY = 0;
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        int depth = (int)(Mathf.Floor((transform.position.y - 2.025959f)) / 2 + 0.5f);
+        depth = (int)(Mathf.Floor((transform.position.y - 2.025959f)) / 2 + 0.5f);
         if (depthText && lastY != depth)
         {
             depthText.text = "Depth: " + depth;
