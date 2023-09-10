@@ -28,29 +28,29 @@ public class Grid : MonoBehaviour
 
             for (int x = 0; x < gridX; x++)
             {
-                if(blocksToSkip > 0 && Random.Range(0, 100) <= 89)
+                if (blocksToSkip > 0 && Random.Range(0, 100) <= 89)
                 {
                     blocksToSkip--;
                     continue;
                 }
                 GameObject currObj;
 
-                
 
-                if(Random.Range(1, 10000) <= 5)
+
+                if (Random.Range(1, 10000) <= 5)
                 {
                     blocksToSkip = Random.Range(90, 180);
                 }
 
 
                 //Iron
-                if (GenerateBlock(x, y, ironPrefab, -30, -60, 1,100))
+                if (GenerateBlock(x, y, ironPrefab, -30, -60, 1, 100))
                 {
                     continue;
                 }
 
                 //Tungsten
-                if(GenerateBlock(x,y, tungstenPrefab, -50, -100, 1, 100))
+                if (GenerateBlock(x, y, tungstenPrefab, -50, -100, 1, 100))
                 {
                     continue;
                 }
@@ -66,35 +66,48 @@ public class Grid : MonoBehaviour
                 {
                     continue;
                 }
-                
-               
+
+
                 // Terra
-                if(y > -20)
+                if (y > -20)
                 {
                     currObj = Instantiate(prefab, Vector2.zero, Quaternion.identity, transform);
                     currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
                     continue;
                 }
 
-                //Transiçao de terra
-                if(y <= -20 && y > -28 )
+                //Dirt transition
+               
+                if (GenerateBlock(x, y, prefab, -19, -28, 75, 100))
                 {
-                    if (Random.Range(0, 100) <= 75)
-                    {
-                        currObj = Instantiate(prefab, Vector2.zero, Quaternion.identity, transform);
-                        currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
-                        continue;
-                    }
+
+                    continue;
+
                 }
-                //Pedra
-                if(GenerateBlock(x,y, stonePrefab,-19, -120,100, 100))
+
+                //Stone
+                if (GenerateBlock(x, y, stonePrefab, -19, -120, 100, 100))
                 {
 
                     continue;
                 }
 
-                if(GenerateBlock(x,y, hardStonePrefab, -119, -200, 100, 100))
+
+                //Stone transition
+                if (GenerateBlock(x, y, stonePrefab, -119, -128, 75, 100))
                 {
+
+                    continue;
+
+                }
+
+                if (GenerateBlock(x, y, hardStonePrefab, -119, -200, 100, 100))
+                {
+                    continue;
+                }
+
+                if (GenerateBlock(x, y, hardStonePrefab, -199, -208, 75, 100))
+                { 
                     continue;
                 }
 
@@ -107,7 +120,7 @@ public class Grid : MonoBehaviour
     bool GenerateBlock(int x, int y, GameObject prefab, int yUnder, int probability, int randomRange)
     {
         GameObject currObj;
-        if (Random.Range(0, randomRange) <= probability   && y < yUnder)
+        if (Random.Range(0, randomRange) <= probability && y < yUnder)
         {
             currObj = Instantiate(prefab, Vector2.zero, Quaternion.identity, transform);
             currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
@@ -128,5 +141,5 @@ public class Grid : MonoBehaviour
         return false;
     }
 
-    
+
 }
