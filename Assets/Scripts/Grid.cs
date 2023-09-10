@@ -6,12 +6,15 @@ using static UnityEditor.PlayerSettings;
 public class Grid : MonoBehaviour
 {
     public GameObject prefab;
-    public GameObject rubyPrefab;
     public GameObject stonePrefab;
-    public GameObject copperPrefab;
     public GameObject hardStonePrefab;
+    public GameObject magmaStonePrefab;
+
+    public GameObject copperPrefab;
     public GameObject ironPrefab;
     public GameObject tungstenPrefab;
+    public GameObject rubyPrefab;
+
     public int gridX = -3;
     public int gridY = -5;
     public float spacing = 2f;
@@ -46,7 +49,14 @@ public class Grid : MonoBehaviour
                     continue;
                 }
 
+                //Tungsten
                 if(GenerateBlock(x,y, tungstenPrefab, -50, -100, 1, 100))
+                {
+                    continue;
+                }
+
+                //Copper
+                if (GenerateBlock(x, y, copperPrefab, -20, -50, 1, 100))
                 {
                     continue;
                 }
@@ -57,11 +67,7 @@ public class Grid : MonoBehaviour
                     continue;
                 }
                 
-                //Copper
-                if(GenerateBlock(x, y, copperPrefab, -20, -50, 1, 100))
-                {
-                    continue;
-                }
+               
                 // Terra
                 if(y > -20)
                 {
@@ -87,7 +93,12 @@ public class Grid : MonoBehaviour
                     continue;
                 }
 
-                currObj = Instantiate(hardStonePrefab, Vector2.zero, Quaternion.identity, transform);
+                if(GenerateBlock(x,y, hardStonePrefab, -119, -200, 100, 100))
+                {
+                    continue;
+                }
+
+                currObj = Instantiate(magmaStonePrefab, Vector2.zero, Quaternion.identity, transform);
                 currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
             }
         }
