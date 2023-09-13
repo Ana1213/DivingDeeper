@@ -19,9 +19,12 @@ public class Grid : MonoBehaviour
     public int gridY = -5;
     public float spacing = 2f;
     int blocksToSkip = 0;
+
+
+    public BreakableBlock[,] blocks;
     void Start()
     {
-
+        blocks = new BreakableBlock[Mathf.Abs(gridX), Mathf.Abs(gridY)];
 
         for (int y = 0; y > gridY; y--)
         {
@@ -113,6 +116,7 @@ public class Grid : MonoBehaviour
 
                 currObj = Instantiate(magmaStonePrefab, Vector2.zero, Quaternion.identity, transform);
                 currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
+                blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj.GetComponent<BreakableBlock>();
             }
         }
     }
@@ -124,6 +128,7 @@ public class Grid : MonoBehaviour
         {
             currObj = Instantiate(prefab, Vector2.zero, Quaternion.identity, transform);
             currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
+            blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj.GetComponent<BreakableBlock>();
             return true;
         }
         return false;
@@ -136,6 +141,7 @@ public class Grid : MonoBehaviour
         {
             currObj = Instantiate(prefab, Vector2.zero, Quaternion.identity, transform);
             currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
+            blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj.GetComponent<BreakableBlock>();
             return true;
         }
         return false;

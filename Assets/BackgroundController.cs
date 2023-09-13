@@ -6,11 +6,16 @@ public class BackgroundController : MonoBehaviour
 {
     int lastDepth;
     int currDepth;
-
+    PlayerController player;
     public Animator bgAnimator;
+
+    private void Start()
+    {
+        player = PlayerController.instance;
+    }
     void Update()
     {
-        currDepth = PlayerController.instance.depth;
+        currDepth = player.depth;
 
         if (currDepth != lastDepth)
         {

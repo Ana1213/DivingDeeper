@@ -19,6 +19,7 @@ public class MineHability : MonoBehaviour
     public SpriteRenderer plrHand;
     public static MineHability instance;
     public Animator animController;
+
     private void Start()
     {
         if (instance == null)

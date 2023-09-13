@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         if (depthText && lastY != depth)
         {
             depthText.text = "Depth: " + depth;
-            Debug.Log("A");
+
         }
 
         lastY = depth;
