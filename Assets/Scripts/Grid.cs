@@ -24,10 +24,12 @@ public class Grid : MonoBehaviour
 
     public int cavernScale;
     public int seed;
+    public float amplitude;
 
     public GameObject[,] blocks;
     void Start()
     {
+        seed = Random.Range(0, 9999);
         blocks = new GameObject[gridX, gridY];
 
         for (int y = 0; y > (-gridY); y--)
@@ -35,20 +37,8 @@ public class Grid : MonoBehaviour
 
             for (int x = 0; x < gridX; x++)
             {
-                if (blocksToSkip > 0 && Random.Range(0, 100) <= 89)
-                {
-                    blocksToSkip--;
-                    continue;
-                }
+              
                 GameObject currObj;
-
-
-
-                if (Random.Range(1, 10000) <= 5)
-                {
-                    blocksToSkip = Random.Range(90, 180);
-                }
-
 
                 //Iron
                 if (GenerateBlock(x, y, ironPrefab, -30, -60, 1, 100))
@@ -149,10 +139,10 @@ public class Grid : MonoBehaviour
     float CalculatePerlinPosition(int x, int y)
     {
 
-        float xCoord = ((float)x / gridX) * cavernScale + seed;
-        float yCoord = ((float)y / gridY) * cavernScale + seed;
+        float xCoord = ((float)x / 400) * cavernScale + seed;
+        float yCoord = ((float)y / 300) * cavernScale + seed;
 
-        return Mathf.PerlinNoise(xCoord, yCoord);
+        return Mathf.PerlinNoise(xCoord /amplitude, yCoord / amplitude);
     }
     void CarveBlocks()
     {
@@ -162,7 +152,7 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < gridY; y++)
             {
                 Debug.Log(pixels[x, y]);
-                if (pixels[x,y] <= 0.5f)
+                if (pixels[x,y] <= 0.3f)
                 {
                     Destroy(blocks[x, y]);
                     Debug.Log("Destroyed");

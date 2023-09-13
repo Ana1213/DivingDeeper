@@ -183,8 +183,11 @@ MonoBehaviour:
   tungstenPrefab: {fileID: 1160151106521132650, guid: e835c8267c911f3469ba59917f2a3df3, type: 3}
   rubyPrefab: {fileID: 1801670797486439564, guid: f3dd7be4806dc054e9fb5b8eb3797fab, type: 3}
   gridX: 30
-  gridY: -300
+  gridY: 300
   spacing: 2
+  cavernScale: 30
+  seed: 10000
+  amplitude: 1
 --- !u!4 &216881654
 Transform:
   m_ObjectHideFlags: 0
@@ -1349,6 +1352,18 @@ PrefabInstance:
     - target: {fileID: 50817760, guid: 014acc37c49337042a71defd493fc180, type: 3}
       propertyPath: m_margin.w
       value: -2.5820312
+      objectReference: {fileID: 0}
+    - target: {fileID: 526622066583129848, guid: 014acc37c49337042a71defd493fc180, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 526622066583129848, guid: 014acc37c49337042a71defd493fc180, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 526622066583129848, guid: 014acc37c49337042a71defd493fc180, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 526622067622406858, guid: 014acc37c49337042a71defd493fc180, type: 3}
       propertyPath: m_Pivot.x
