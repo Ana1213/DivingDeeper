@@ -25,10 +25,10 @@ public class Grid : MonoBehaviour
     public int cavernScale;
     public int seed;
 
-    public BreakableBlock[,] blocks;
+    public GameObject[,] blocks;
     void Start()
     {
-        blocks = new BreakableBlock[gridX, gridY];
+        blocks = new GameObject[gridX, gridY];
 
         for (int y = 0; y > (-gridY); y--)
         {
@@ -120,11 +120,15 @@ public class Grid : MonoBehaviour
 
                 currObj = Instantiate(magmaStonePrefab, Vector2.zero, Quaternion.identity, transform);
                 currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
-                blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj.GetComponent<BreakableBlock>();
+                blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj;
 
-                CarveBlocks();
+               
             }
+
+
         }
+
+        CarveBlocks();
     }
     float[,] GenerateCaverns()
     {
@@ -134,7 +138,6 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < gridY; y++)
             {
                pixels[x, y] = CalculatePerlinPosition(x, y);
-                Debug.Log(CalculatePerlinPosition(x, y));
             }
         }
 
@@ -149,19 +152,17 @@ public class Grid : MonoBehaviour
         float xCoord = ((float)x / gridX) * cavernScale + seed;
         float yCoord = ((float)y / gridY) * cavernScale + seed;
 
-        Debug.Log(Mathf.PerlinNoise(xCoord, yCoord));
         return Mathf.PerlinNoise(xCoord, yCoord);
     }
     void CarveBlocks()
     {
-        Debug.Log("AA");
         float[,] pixels = GenerateCaverns();
         for (int x = 0; x < gridX; x++)
         {
             for (int y = 0; y < gridY; y++)
             {
                 Debug.Log(pixels[x, y]);
-                if (pixels[x,y] == 0)
+                if (pixels[x,y] <= 0.5f)
                 {
                     Destroy(blocks[x, y]);
                     Debug.Log("Destroyed");
@@ -177,7 +178,7 @@ public class Grid : MonoBehaviour
         {
             currObj = Instantiate(prefab, Vector2.zero, Quaternion.identity, transform);
             currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
-            blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj.GetComponent<BreakableBlock>();
+            blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj;
             return true;
         }
         return false;
@@ -190,7 +191,7 @@ public class Grid : MonoBehaviour
         {
             currObj = Instantiate(prefab, Vector2.zero, Quaternion.identity, transform);
             currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
-            blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj.GetComponent<BreakableBlock>();
+            blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj;
             return true;
         }
         return false;
