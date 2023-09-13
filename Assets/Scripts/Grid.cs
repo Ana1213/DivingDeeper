@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 
 public class Grid : MonoBehaviour
@@ -21,12 +22,15 @@ public class Grid : MonoBehaviour
     int blocksToSkip = 0;
 
 
+    public int cavernScale;
+    public int seed;
+
     public BreakableBlock[,] blocks;
     void Start()
     {
-        blocks = new BreakableBlock[Mathf.Abs(gridX), Mathf.Abs(gridY)];
+        blocks = new BreakableBlock[gridX, gridY];
 
-        for (int y = 0; y > gridY; y--)
+        for (int y = 0; y > (-gridY); y--)
         {
 
             for (int x = 0; x < gridX; x++)
@@ -117,6 +121,51 @@ public class Grid : MonoBehaviour
                 currObj = Instantiate(magmaStonePrefab, Vector2.zero, Quaternion.identity, transform);
                 currObj.transform.localPosition = new Vector3(x, y, 0) * spacing;
                 blocks[Mathf.Abs(x), Mathf.Abs(y)] = currObj.GetComponent<BreakableBlock>();
+
+                CarveBlocks();
+            }
+        }
+    }
+    float[,] GenerateCaverns()
+    {
+        float[,] pixels = new float[gridX, gridY];
+        for (int x = 0; x < gridX; x++)
+        {
+            for (int y = 0; y < gridY; y++)
+            {
+               pixels[x, y] = CalculatePerlinPosition(x, y);
+                Debug.Log(CalculatePerlinPosition(x, y));
+            }
+        }
+
+        return pixels;
+        
+    }
+
+
+    float CalculatePerlinPosition(int x, int y)
+    {
+
+        float xCoord = ((float)x / gridX) * cavernScale + seed;
+        float yCoord = ((float)y / gridY) * cavernScale + seed;
+
+        Debug.Log(Mathf.PerlinNoise(xCoord, yCoord));
+        return Mathf.PerlinNoise(xCoord, yCoord);
+    }
+    void CarveBlocks()
+    {
+        Debug.Log("AA");
+        float[,] pixels = GenerateCaverns();
+        for (int x = 0; x < gridX; x++)
+        {
+            for (int y = 0; y < gridY; y++)
+            {
+                Debug.Log(pixels[x, y]);
+                if (pixels[x,y] == 0)
+                {
+                    Destroy(blocks[x, y]);
+                    Debug.Log("Destroyed");
+                }
             }
         }
     }
