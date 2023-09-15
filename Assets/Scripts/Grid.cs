@@ -151,11 +151,11 @@ public class Grid : MonoBehaviour
         {
             for (int y = 0; y < gridY; y++)
             {
-                Debug.Log(pixels[x, y]);
+                //Debug.Log(pixels[x, y]);
                 if (pixels[x,y] <= 0.3f)
                 {
                     Destroy(blocks[x, y]);
-                    Debug.Log("Destroyed");
+                    //Debug.Log("Destroyed");
                 }
             }
         }
