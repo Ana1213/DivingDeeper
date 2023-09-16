@@ -10,6 +10,8 @@ public class MouseRotation : MonoBehaviour
     Transform player;
     Vector3 mousePos;
     Vector3 screenCenter;
+
+    public Transform playerSprite;
     private void Start()
     {
         player = PlayerController.instance.transform;
@@ -25,10 +27,11 @@ public class MouseRotation : MonoBehaviour
 
         if(angle >= 100 && angle <= 180 || angle >= -180  && angle <= -100)
         {
-            transform.localScale = new Vector3(1, -1, 1);
+            transform.localScale = new Vector2(1, -1);
+            playerSprite.localScale = new Vector2(-Mathf.Abs(playerSprite.localScale.x), playerSprite.localScale.y);
         }else if(angle <= 100 && angle >= 0 || angle >= -100 && angle <= 0) {
-            transform.localScale = new Vector3(1, 1, 1);
-
+            transform.localScale = new Vector2(1, 1);
+            playerSprite.localScale = new Vector2(Mathf.Abs(playerSprite.localScale.x), playerSprite.localScale.y);
         }
        
         
